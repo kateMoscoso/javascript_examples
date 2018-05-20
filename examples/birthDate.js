@@ -17,5 +17,5 @@ const tiempomin = tiemposeg / 60
 const tiempohor = tiempomin / 60
 const tiempodias = tiempohor / 24
 const tiempoyear = tiempodias / 365
-const proximo = newDate(hoy.getFullYear(), nacimiento.getMonth(), nacimiento.getDate())
+const proximo = new Date(hoy.getFullYear(), nacimiento.getMonth(), nacimiento.getDate())
 console.log(dias[proximo.getDay()])
