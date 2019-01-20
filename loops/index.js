@@ -27,7 +27,8 @@ for (var i = 1; i <= DIAS_DEL_ANO; i++) {
         adelgazar(persona_1)
     }
 }
-
+const META = 2;
+var dias = 0;
 while (persona_1.peso > META) {
     if (comeMucho()) {
         aumentarDePeso(persona_1)

@@ -5,8 +5,13 @@ class Persona {
         this.altura = altura
     }
 
-    saludar() {
-        console.log(`Hola, me llamo ${this.nombre} ${this.apellido}`)
+    saludar(fn) {
+        var { nombre, apellido } = this
+
+        console.log(`Hola, me llamo ${nombre} ${apellido}`)
+        if (fn) {
+            fn(nombre, apellido)
+        }
     }
 
     soyAlto() {
@@ -19,12 +24,29 @@ class Desarrollador extends Persona {
         super(nombre, apellido, altura)
     }
 
-    saludar() {
-        console.log(`Hola, me llamo ${this.nombre} ${this.apellido} y soy desarrollador/a`)
+    saludar(fn) {
+        // var nombre = this.nombre
+        // var apellido = this.apellido
+        var { nombre, apellido } = this
+
+        console.log(`Hola, me llamo ${nombre} ${apellido} y soy desarrollador/a`)
+        if (fn) {
+            fn(nombre, apellido, true)
+        }
     }
 }
 
+function responderSaludo(nombre, apellido, esDev) {
+    console.log(`Buen día ${nombre} ${apellido}`)
+    if (esDev) {
+        console.log(`Ah mirá, no sabía que eras desarrollador/a`)
+    }
+}
 
-// var sacha = new Persona('Sacha', 'Lifszyc', 1.72)
-// var erika = new Persona('Erika', 'Luna', 1.65)
-// var arturo = new Persona('Arturo', 'Martinez', 1.89)
+var sacha = new Persona('Sacha', 'Lifszyc', 1.72)
+var erika = new Persona('Erika', 'Luna', 1.65)
+var arturo = new Desarrollador('Arturo', 'Martinez', 1.89)
+
+sacha.saludar()
+erika.saludar(responderSaludo)
+arturo.saludar(responderSaludo)
