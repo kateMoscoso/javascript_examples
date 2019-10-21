@@ -1,52 +1,76 @@
-class Persona {
-    constructor(nombre, apellido, altura) {
+const especialidades = [
+    1,
+    2,
+    3
+]
+const nombreEspecialidades = {
+    1: 'Sistemas',
+    2: 'Web',
+    3: 'Multiplataforma'
+
+}
+class Alumno {
+    constructor(nombre, edad, especialidad, companero) {
         this.nombre = nombre
-        this.apellido = apellido
-        this.altura = altura
-    }
-
-    saludar(fn) {
-        var { nombre, apellido } = this
-
-        console.log(`Hola, me llamo ${nombre} ${apellido}`)
-        if (fn) {
-            fn(nombre, apellido)
+        this.edad = edad
+        if(especialidad){ 
+           if(especialidades.indexOf(especialidad)>=0){
+             this.especialidad = especialidad
+           }
+           else{
+               throw new Error(`no es una especialidad correcta`);
+           }
+        }
+        if(companero){ 
+           if(companero instanceof Alumno){
+               this.companero = companero
+           }
+           else{
+               throw new Error(`no es de tipo correcto`);
+           }
         }
     }
 
-    soyAlto() {
-        return this.altura > 1.8
+    mostrar() {
+        return `${this.nombre} - ${this.edad} - ${this.especialidad} - ${this.companero?this.companero.getNombre(): 'no  asignado'}  `
+    }
+    getNombre() {
+        return `${this.nombre}`
+    }
+    setNombre(nombre) {
+        this.nombre = nombre
+    }
+    getEdad() {
+        return `${this.edad}`
+    }
+    setEdad(edad) {
+        this.edad = edad
+    }
+    getEspecialidad() {
+        return `${nombreEspecialidades[this.especialidad]}`
+    }
+    getCompanero() {
+        return this.companero
+    }
+    setCompanero(companero) {
+        if( companero instanceof Alumno){
+            this.companero = companero
+         }
+         else{
+             throw new Error(`no es de tipo correcto`);
+         }
+    }
+    getNomberCompanero() {
+        return this.companero? this.companero.getNombre(): 'no asignado'
     }
 }
 
-class Desarrollador extends Persona {
-    constructor(nombre, apellido, altura) {
-        super(nombre, apellido, altura)
-    }
 
-    saludar(fn) {
-        // var nombre = this.nombre
-        // var apellido = this.apellido
-        var { nombre, apellido } = this
 
-        console.log(`Hola, me llamo ${nombre} ${apellido} y soy desarrollador/a`)
-        if (fn) {
-            fn(nombre, apellido, true)
-        }
-    }
-}
 
-function responderSaludo(nombre, apellido, esDev) {
-    console.log(`Buen día ${nombre} ${apellido}`)
-    if (esDev) {
-        console.log(`Ah mirá, no sabía que eras desarrollador/a`)
-    }
-}
-
-var sacha = new Persona('Sacha', 'Lifszyc', 1.72)
-var erika = new Persona('Erika', 'Luna', 1.65)
-var arturo = new Desarrollador('Arturo', 'Martinez', 1.89)
-
-sacha.saludar()
-erika.saludar(responderSaludo)
-arturo.saludar(responderSaludo)
+var alumno1 = new Alumno('Elba', 48, 1)
+var alumno2 = new Alumno('Pablo', 48, 3)
+alumno1.setCompanero(alumno2)
+alumno1.mostrar()
+alumno2.mostrar()
+alumno2.getEspecialidad()
