@@ -2,14 +2,19 @@ function handleError(err) {
     console.log(`Request failed: ${err}`)
 }
 
-async function getLuke() {
+async function getLinks() {
     try {
-        const response = await fetch('http://swapi.co/api/people/1/')
-        const luke = await response.json()
-        const responseHomeworld = await fetch(luke.homeworld)
-        luke.homeworld = await responseHomeworld.json()
-        console.log(`${luke.name} nació en ${luke.homeworld.name}`)
+        const response = await fetch('https://dog.ceo/api/breeds/list')
+        const breeds = await response.json()
+        //const responseHomeworld = await fetch(luke.homeworld)
+        //luke.homeworld = await responseHomeworld.json()
+       // console.log(`${luke.name} nació en ${luke.homeworld.name}`)
+       processBreeds(breeds);
     } catch (err) {
         handleError(err)
     }
+}
+function processBreeds(...breeds){
+    console.log(`${luke.name} nació en ${luke.homeworld.name}`)
+
 }
